@@ -19,10 +19,12 @@ module "vpc" {
 
 
 resource "aws_instance" "my_server" {
-  ami           = "ami-09538990a0c4fe9be"
-  instance_type = "t2.micro"
+  ami                         = "ami-09538990a0c4fe9be"
+  instance_type               = var.instance_type
+  subnet_id                   = "subnet-091114eb750979a1e"
+  associate_public_ip_address = true
 
   tags = {
-    Name = "MyServer"
+    Name = "MyServer-${local.project_name}"
   }
 }
