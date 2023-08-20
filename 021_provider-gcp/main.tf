@@ -1,22 +1,22 @@
 terraform {
   required_providers {
     google = {
-      source = "hashicorp/google"
-      version = "3.84.0"
+      source  = "hashicorp/google"
+      version = "4.78.0"
     }
   }
 }
 
 provider "google" {
-  credentials = "terraform-gcp-example-326401-042e1f1dc62c.json"
-	project = "terraform-gcp-example-326401"
-	region = "us-central1"
-	zone = "us-central1-c"
+  credentials = ".json"
+  project     = "terraform-dev-393722"
+  region      = "us-central1"
+  zone        = "us-central1-a"
 }
 
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
-  machine_type = "e2-micro"
+  machine_type = "f1-micro"
 
   boot_disk {
     initialize_params {
@@ -26,6 +26,6 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     network = "default"
-    access_config { }
+    access_config {}
   }
 }
