@@ -1,0 +1,19 @@
+var.instance_type
+  The size of the instance.
+
+  Enter a value: t3.micro
+
+
+Planning failed. Terraform encountered an error while generating this plan.
+
+╷
+│ Error: Invalid value for variable
+│
+│   on main.tf line 10:
+│   10: variable "instance_type" {
+│     ├────────────────
+│     │ var.instance_type is "t3.micro"
+│
+│ The instance must be a t2 type EC2 instance.
+│
+│ This was checked by the validation rule at main.tf:14,2-12.

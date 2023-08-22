@@ -7,10 +7,12 @@ terraform {
   }
 }
 
+
+
 variable "instance_type" {
 	type = string
-	description = "The size of the instance."
-	#sensitive = true
+  description = "The size of the instance."
+  sensitive = false
 	validation {
     condition     = can(regex("^t2.",var.instance_type))
     error_message = "The instance must be a t2 type EC2 instance."
@@ -21,6 +23,12 @@ provider "aws" {
   profile = "default"
   region  = "us-east-1"
 }
+
+
+locals {
+  instance_type = var.instance_type
+}
+
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -39,10 +47,14 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "my_server" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               =  local.instance_type
+  subnet_id                   = "subnet-091114eb750979a1e"
+  associate_public_ip_address = true
+
 }
 
 output "public_ip" {
   value = aws_instance.my_server.public_ip
+  sensitive = false
 }
