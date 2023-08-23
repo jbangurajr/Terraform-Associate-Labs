@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.58.0"
+      version = "5.13.1"
     }
   }
 }
@@ -13,15 +13,14 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "43802482094298-depends-on"
+  bucket = "unique-bucket-name-12345"
+  depends_on = [aws_instance.my_server]
 }
 
 resource "aws_instance" "my_server" {
   ami           = "ami-087c17d1fe0178315"
   instance_type = "t2.micro"
-	depends_on = [
-		aws_s3_bucket.bucket
-	]
+
 }
 
 output "public_ip" {
