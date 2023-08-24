@@ -1,15 +1,24 @@
 terraform {
+  
+}
 
+variable "hello" {
+    type = string
+  
 }
 
 variable "worlds" {
-	type = list
+    type = list
+  
 }
-
+  
 variable "worlds_map" {
-	type = map
+    type = map
+  
 }
 
 variable "worlds_splat" {
-	type = list
+    type = list
+  
 }
+  
