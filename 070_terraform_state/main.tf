@@ -1,24 +1,7 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "3.58.0"
-    }
-  }
-}
+terraform state list
 
-provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
-}
-resource "aws_instance" "our_server" {
-  ami           = "ami-087c17d1fe0178315"
-  instance_type = "t2.micro"
-	tags = {
-		Name = "MyServer"
-	}
-}
+terraform state show aws_instance.example
 
-output "public_ip" {
-  value = aws_instance.our_server[*].public_ip
-}
+terraform state rm aws_instance.example
+
+terraform state mv aws_instance.example aws_instance.new_example
