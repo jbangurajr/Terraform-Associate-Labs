@@ -1,24 +1,7 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "3.58.0"
-    }
-  }
-}
+TF_LOG=trace terraform apply
 
-provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
-}
-resource "aws_instance" "my_server" {
-  ami           = "ami-087c17d1fe0178315"
-  instance_type = "t2.micro"
-	tags = {
-		Name = "MyServer"
-	}
-}
+TFLOG=trace TFLOG_PATH=terraform.log terraform apply
 
-output "public_ip" {
-  value = aws_instance.my_server.public_ip
-}
+TFLOGCORE=trace terraform apply
+
+TFLOGPROVIDER=trace terraform apply
