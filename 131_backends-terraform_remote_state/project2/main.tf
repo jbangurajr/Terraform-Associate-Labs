@@ -10,14 +10,16 @@ data "terraform_remote_state" "vpc" {
 	}
 }
 
+
 module "apache" {
-  source  = "../../110_modules/terraform-aws-apache-example"
-  #version = "1.0.0"
-	vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
-	my_ip_with_cidr = var.my_ip_with_cidr
-	public_key = var.public_key
-	instance_type = var.instance_type
- 	server_name = var.server_name
+  source          = "jbangurajr/apache-example/aws"
+  version         = "v1.0.5"
+  vpc_id          = data.vpc.vpc_id
+  subnet_id       = data.vpc.public_subnets[0]
+  my_ip_with_cidr = var.my_ip_with_cidr
+  public_key      = var.public_key
+  instance_type   = var.instance_type
+  server_name     = var.server_name
 }
 
 output "public_ip" {

@@ -7,6 +7,11 @@ variable "vpc_id" {
   type = string
 }
 
+variable "subnet_id" {
+  type = string
+}
+
+
 variable "my_ip_with_cidr" {
   type = string
 }

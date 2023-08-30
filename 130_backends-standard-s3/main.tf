@@ -18,8 +18,9 @@ resource "aws_s3_bucket" "bucket" {
 
 module "apache" {
   source          = "jbangurajr/apache-example/aws"
-  version         = "v1.0.4"
+  version         = "v1.0.5"
   vpc_id          = var.vpc_id
+  subnet_id       = var.subnet_id
   my_ip_with_cidr = var.my_ip_with_cidr
   public_key      = var.public_key
   instance_type   = var.instance_type
