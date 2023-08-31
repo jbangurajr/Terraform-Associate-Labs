@@ -1,21 +1,20 @@
 provider "aws" {
-	profile = "default"
-	region = "us-east-1"
+  profile = "default"
+  region  = "us-east-1"
 }
 
 data "terraform_remote_state" "vpc" {
-	backend = "local"
-	config = {
-		path = "../project1/terraform.tfstate"
-	}
+  backend = "local"
+  config = {
+    path = "../project1/terraform.tfstate"
+  }
 }
 
-
 module "apache" {
-  source          = "jbangurajr/apache-example/aws"
-  version         = "v1.0.5"
-  vpc_id          = data.vpc.vpc_id
-  subnet_id       = data.vpc.public_subnets[0]
+  source = "../../110_modules/terraform-aws-apache-example"
+  #version = "1.0.0"
+  vpc_id          = data.terraform_remote_state.vpc.outputs.vpc_id
+  subnet_id  = data.terraform_remote_state.vpc.outputs.public_subnets[0]
   my_ip_with_cidr = var.my_ip_with_cidr
   public_key      = var.public_key
   instance_type   = var.instance_type
