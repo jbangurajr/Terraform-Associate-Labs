@@ -1,5 +1,5 @@
 terraform {
-
+  
 }
 
 variable "planets" {
@@ -32,3 +32,32 @@ variable "plan" {
 		"PlanAmount" = 10
 	}
 }
+
+
+/*
+
+terraform console
+
+> var.plans
+tomap({
+  "PlanA" = "10 USD"
+  "PlanB" = "50 USD"
+  "PlanC" = "100 USD"
+})
+
+
+> var.random
+[
+  "hello",
+  22,
+  false,
+]
+
+
+> var.plan
+{
+  "PlanAmount" = 10
+  "PlanName" = "Basic"
+}
+
+*/
